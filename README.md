@@ -1,0 +1,1 @@
+# Prestashop_manage_content
