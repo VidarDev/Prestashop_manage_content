@@ -1,0 +1,100 @@
+#Fichiers à la racine et extensions à ne pas prendre en compte
+*.log
+.DS_Store
+/.idea/
+/info.php
+/*.sql
+/*.sql.gz
+/.htaccess
+/robots.txt
+/sitemap.xml
+ 
+#wepack
+node_modules/
+ 
+#Backoffice
+/backoff/autoupgrade/*
+!/backoff/autoupgrade/index.php
+/backoff/backups/*
+!/backoff/backups/.htaccess
+!/backoff/backups/index.php
+/backoff/export/*
+!/backoff/export/.htaccess
+!/backoff/export/index.php
+/backoff/import/*
+!/backoff/import/.htaccess
+!/backoff/import/index.php
+ 
+# Fichiers de configuration
+/app/config/parameters.php
+/app/config/parameters.php.local
+/app/config/parameters.yml
+/config/settings.*.php
+/config/defines_custom.inc.php
+/config/xml/*.xml
+ 
+#Cache applicatif
+/cache/*
+!/cache/index.php
+!/cache/.htaccess
+!/cache/*/
+/cache/*/*
+!/cache/cachefs/index.php
+!/cache/purifier/index.php
+!/cache/push/index.php
+!/cache/sandbox/index.php
+!/cache/smarty/index.php
+!/cache/tcpdf/index.php
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+ 
+#Contenus du site
+/download/*
+!/download/.htaccess
+!/download/index.php
+/upload/*
+!/upload/.htaccess
+ 
+#Gestion des images ( On conserve les images système, et les index.php uniquement dans les autres dossiers )
+/img/c/*
+!/img/c/index.php
+/img/cms/*
+!/img/cms/index.php
+/img/co/*
+!/img/co/index.php
+/img/l/*
+!/img/l/index.php
+/img/m/*
+!/img/m/index.php
+/img/os/*
+!/img/os/index.php
+/img/p/*
+!/img/p/index.php
+/img/s/*
+!/img/s/index.php
+/img/st/*
+!/img/st/index.php
+/img/su/*
+!/img/su/index.php
+/img/tmp/*
+!/img/tmp/index.php
+ 
+#Gestion des overrides ( A définir sur le projet )
+ 
+#Modules ( Affiner ici avec les modules spécifiques installés )
+ 
+## Modules natifs prestashop
+/modules/ps_imageslider/images/*
+!/modules/ps_imageslider/images/index.php
+ 
+## Modules spécifiques au site
+ 
+#Modules de dev
+/modules/debug/
+/modules/pscleaner/
+ 
+#Themes
+/themes/*/cache/
+/themes/*/assets/cache/
+/modules/*/config*.xml
