@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
@@ -23,6 +24,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  */
+
 use Symfony\Component\Translation\TranslatorInterface;
 
 class CustomerFormatterCore implements FormFormatterInterface
@@ -109,6 +111,25 @@ class CustomerFormatterCore implements FormFormatterInterface
             $format[$genderField->getName()] = $genderField;
         }
 
+        if (\Module::isInstalled('itrmanagecontent') && \Module::isEnabled('itrmanagecontent')) {
+            $avatarField = (new FormField())
+                ->setName('avatar')
+                ->setType('select')
+                ->setLabel($this->translator->trans('Avatar', [], 'Shop.Forms.Labels'))
+                ->setRequired(false);
+
+            // Récupérer les images PNG du répertoire avatars
+            $avatarsPath = _PS_MODULE_DIR_ . 'itrmanagecontent/views/img/avatars/';
+            $avatars = scandir($avatarsPath);
+            foreach ($avatars as $avatar) {
+                if ($avatar !== '.' && $avatar !== '..' && pathinfo($avatar, PATHINFO_EXTENSION) === 'png') {
+                    $avatarField->addAvailableValue($avatar, $avatar);
+                }
+            }
+
+            $format['avatar'] = $avatarField;
+        }
+
         $format['firstname'] = (new FormField())
             ->setName('firstname')
             ->setLabel(
@@ -138,6 +159,7 @@ class CustomerFormatterCore implements FormFormatterInterface
                 'comment',
                 $this->translator->trans('Only letters and the dot (.) character, followed by a space, are allowed.', [], 'Shop.Forms.Help')
             );
+
 
         if (Configuration::get('PS_B2B_ENABLE')) {
             $format['company'] = (new FormField())

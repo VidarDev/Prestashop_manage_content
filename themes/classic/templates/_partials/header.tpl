@@ -70,6 +70,11 @@
           {/if}
         </div>
         <div class="header-top-right col-md-10 col-sm-12 position-static">
+        {if $customer.is_logged}
+          <p>Bonjour {$customer.firstname} {if isset($customer.avatar)}<img src="{$urls.base_url}modules/itrmanagecontent/views/img/avatars/{$customer.avatar}" alt="" />{/if}</p>
+        {/if}
+
+
           {hook h='displayTop'}
         </div>
       </div>

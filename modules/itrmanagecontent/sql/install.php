@@ -26,11 +26,7 @@
  */
 $sql = array();
 
-$sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'itrmanagecontent` (
-    `id_itrmanagecontent` int(11) NOT NULL AUTO_INCREMENT,
-    `content` text NOT NULL,
-    PRIMARY KEY  (`id_itrmanagecontent`)
-) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+$sql[] =  'ALTER TABLE ' . _DB_PREFIX_ . 'customer ADD `avatar` VARCHAR(255) NULL';
 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {

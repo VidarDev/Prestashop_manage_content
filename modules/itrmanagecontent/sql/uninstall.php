@@ -32,7 +32,7 @@
  */
 $sql = array();
 
-$sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'itrmanagecontent`';
+$sql[] = 'ALTER TABLE ' . _DB_PREFIX_ . 'customer DROP COLUMN `avatar`';
 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {
