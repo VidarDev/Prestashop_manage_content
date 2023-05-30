@@ -30,7 +30,7 @@
         href="{$urls.actions.logout}"
         rel="nofollow"
       >
-        <i class="material-icons">&#xE7FF;</i>
+        {if isset($customer.avatar)}<img id="avatar" src="{$urls.base_url}modules/itrmanagecontent/views/img/avatars/{$customer.avatar}" alt="" />{/if}
         {l s='Sign out' d='Shop.Theme.Actions'}
       </a>
       <a

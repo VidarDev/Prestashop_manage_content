@@ -24,10 +24,33 @@
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
+
 $sql = array();
 
-$sql[] =  'ALTER TABLE ' . _DB_PREFIX_ . 'customer ADD `avatar` VARCHAR(255) NULL';
+// Vérifier si "avatar" existe dans la table `customer`
+$sql_verif = 'SELECT COLUMN_NAME 
+            FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_SCHEMA = "' . _DB_NAME_ . '" 
+            AND TABLE_NAME = "' . _DB_PREFIX_ . 'customer" 
+            AND COLUMN_NAME = "avatar"';
+$result = Db::getInstance()->executeS($sql_verif);
 
+// Créer la table error_report
+$sql[] =  'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'error_report` (
+    `id_error_report` int(11) NOT NULL AUTO_INCREMENT,
+    `id_product` int(11) NOT NULL,
+    `product_name` varchar(255) NOT NULL,
+    `report_text` text NOT NULL,
+    `date_add` datetime NOT NULL,
+    PRIMARY KEY (`id_error_report`)
+    ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8';
+
+if (empty($result)) {
+    // Créer la column "avatar" dans la table `customer`
+    $sql[] =  'ALTER TABLE ' . _DB_PREFIX_ . 'customer ADD `avatar` VARCHAR(255) NULL';
+}
+
+// Executer les requetes SQL 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {
         return false;

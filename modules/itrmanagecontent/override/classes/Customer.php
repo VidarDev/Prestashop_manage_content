@@ -1,4 +1,6 @@
 <?php
+
+// Définir avatar dans la classe/Entité `customer`
 class Customer extends CustomerCore
 {
     public $avatar;

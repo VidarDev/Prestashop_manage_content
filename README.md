@@ -2,23 +2,23 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-The aim of this recruitment test is to create a Prestashop module in version 1.7.8 to add customizable content (wysiwyg) to the home page, products and categories.
+L'objectif de ce test de recrutement est de créer un module Prestashop en version 1.7.8 pour différentes fonctions sur la page d'accueil, les produits et si l'utilisateur est connecté.
 
 ## Installation
 
-Clone the project
+Cloner le projet
 
 ```bash
   git clone git@github.com:VidarDev/Prestashop_manage_content.git
 ```
 
-Import database (not listed)
+Importer la Base de données (Non fourni)
 
 ```bash
-  (not listed)
+  (Non fourni)
 ```
 
-Go to the project directory
+Aller dans le dossier du projet
 
 ```bash
   cd Prestashop_manage_content
@@ -26,15 +26,57 @@ Go to the project directory
 
 ## Module
 
-Go to the module directory
+Aller dans le dossier du module
 
 ```bash
    cd Prestashop_manage_content/modules/itrmanagecontent/
 ```
 
-CustormerFormatter.php
+### Arborescence
 
 ```bash
+  override/
+      class/
+            Customer.php
+  sql/
+      install.php
+      uninstall.php
+  translations/
+      fr.php
+  views/
+      css/
+          back.css
+          front.css
+      img/
+          avatar/
+      js/
+          back.js
+          front.js
+      templates/
+          admin/
+              config.tpl
+          hook/
+              connecte.tpl
+              header.tpl
+              modal.tpl
+              non_connecte.tpl
+  ajax.php
+  itrmanagecontent.php
+```
+
+### Particularités
+
+Pour créer le nouveau "champ" dans le formulaire "Vos informations personnelles" de prestashop, vous devez écrire dans le fichier "CustormerFormatter.php" (Impossible à surcharger) :
+
+Chemin :
+
+```bash
+  override/classes/Customer.php
+```
+
+Code :
+
+```php
     if (\Module::isInstalled('itrmanagecontent') && \Module::isEnabled('itrmanagecontent')) {
         $avatarField = (new FormField())
             ->setName('avatar')
@@ -54,3 +96,24 @@ CustormerFormatter.php
         $format['avatar'] = $avatarField;
     }
 ```
+
+Pour afficher l'avatar de l'utilisateur dans le header de prestashop, vous devez écrire dans le fichier "ps_customersignin.tpl" (Impossible à surcharger) :
+
+Chemin :
+
+```bash
+  themes/{theme.name}/modules/ps_customersignin/ps_customersignin.tpl
+```
+
+Code :
+
+```php
+  {if isset($customer.avatar)}<img id="avatar" src="{$urls.base_url}modules/itrmanagecontent/views/img/avatars/{$customer.avatar}" alt="" />{/if}
+  {l s='Sign out' d='Shop.Theme.Actions'}
+```
+
+## Test de recrutement
+
+### Point non traité :
+
+- Un mail sera envoyé à la soumission du formulaire à l’administrateur du site

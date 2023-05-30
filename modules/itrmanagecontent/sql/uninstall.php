@@ -32,7 +32,11 @@
  */
 $sql = array();
 
+// Vide le champ "avatar" de la table `customer`
 $sql[] = 'ALTER TABLE ' . _DB_PREFIX_ . 'customer DROP COLUMN `avatar`';
+
+// Supprimer la table error_report
+$sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'error_report`';
 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {
