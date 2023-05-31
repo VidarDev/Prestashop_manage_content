@@ -36,7 +36,7 @@ Partie avatar dans le header
   transform: translateY(-2px);
 }
 
-#header {
+body:has(.itrmanagecontent-banner) #header {
   margin-top: 46px;
 }
 
@@ -65,7 +65,7 @@ Partie avatar dans le header
     row-gap: 8px;
   }
 
-  #header {
+  body:has(.itrmanagecontent-banner) #header {
     margin-top: 102px;
   }
 }

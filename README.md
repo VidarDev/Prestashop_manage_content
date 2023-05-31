@@ -71,7 +71,7 @@ Pour créer le nouveau "champ" dans le formulaire "Vos informations personnelles
 Chemin :
 
 ```bash
-  override/classes/Customer.php
+  classes/form/CustomerFormatter.php
 ```
 
 Code :
